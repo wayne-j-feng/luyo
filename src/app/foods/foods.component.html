@@ -1,0 +1,12 @@
+<mat-tab-group>
+    <mat-tab label="New Foods">
+      <app-new-foods></app-new-foods>
+    </mat-tab> 
+    <mat-tab label="Current Foods">
+      <app-current-foods></app-current-foods>
+    </mat-tab> 
+    <mat-tab label="Expired Foods">
+      <app-expired-foods></app-expired-foods>
+    </mat-tab> 
+</mat-tab-group>
+<app-current-foods *ngIf="isFoodSelected"></app-current-foods>

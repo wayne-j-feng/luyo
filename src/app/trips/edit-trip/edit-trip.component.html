@@ -1,0 +1,64 @@
+<section flexLayout  flexLayoutAlign="center">
+  <form (ngSubmit)="onSubmit()" [formGroup]="tripForm">
+    <mat-card fxFlex="600px">
+      <mat-card-title   flexLayoutAlign="center">Trip Editor</mat-card-title>
+      <mat-card-content   flexLayoutAlign="center">
+        <mat-form-field  fxFlex="500px">
+          <input matInput placeholder="Trip Name" formControlName="name">
+          <span
+            class="help-block" 
+            *ngIf="tripForm.get('name').invalid && tripForm.get('name').touched">
+            A valid trip name is required!
+          </span>
+        </mat-form-field>
+        <mat-form-field fxFlex="500px">
+          <input matInput placeholder="Trip Image URI" formControlName="imageUri">
+            <span
+              class="help-block" 
+              *ngIf="tripForm.get('imageUri').invalid && tripForm.get('imageUri').touched">
+              A valid URI is required for an image!
+            </span>
+        </mat-form-field>
+        <mat-form-field fxFlex="500px">
+          <input matInput placeholder="Trip Profile" formControlName="profile">
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions   flexLayoutAlign="center">
+        <button type="submit" mat-button>Save</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel 
+      *ngFor="let activity of activities" 
+      [expanded]="activity === selectedActivity" 
+      (opened)="select(activity)"
+      hideToggle>
+  
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+            <mat-list>
+                <mat-list-item>
+                  <h4 matLine>{{ activity.name }}</h4>
+                  <div matLine class="panel-title-time">
+                      ({{ activity.startTime | date: 'shortTime' }})
+                  </div>
+                </mat-list-item>
+            </mat-list>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{ activity.summary }}
+          <mat-icon>{{ activity.type }}</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <section class="trip-detail" >
+        <app-activity-detail [activity]="activity" *ngIf="activity === selectedActivity"></app-activity-detail>
+      </section>
+      <mat-action-row>
+        <button mat-button (click)="editActivity(activity)">Edit</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <button mat-button (click)="addActivity()">Add Activity</button>
+</section>

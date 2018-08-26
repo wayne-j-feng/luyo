@@ -1,0 +1,29 @@
+mat-cell img {
+    height: 100px;
+    width: 150px;
+}
+.highlight {
+    background: rgb(148, 142, 122);
+}
+.example-headers-align .mat-expansion-panel-header-title, 
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trip-detail {
+  margin-top: 15px;
+}
+
+h3 {
+  margin-left: 10px;
+}
+
+.panel-title-time {
+  font-style: oblique;
+  color: darkgray;
+}

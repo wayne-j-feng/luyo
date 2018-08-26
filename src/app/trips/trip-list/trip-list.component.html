@@ -1,0 +1,13 @@
+<div 
+  fxLayout="row" 
+  fxLayoutAlign="start stretch" 
+  fxLayoutGap="10px">
+  <mat-card  fxFlex="200px" *ngFor="let trip of trips$ | async" (click)="select(trip)">
+    <h4 mat-card-header>{{ trip.name }}</h4>
+    <img mat-card-image src="{{ trip.imageUri }}">
+    <mat-card-content>
+      <p>{{ trip.profile }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+

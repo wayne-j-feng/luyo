@@ -1,0 +1,12 @@
+.attraction-header-image {
+    background-image: url('https://www.cuscoperu.com/imagenes/g_tour/cusco-valle-mapi/0001-CUSCO5D2.jpg');
+    background-size: cover;
+}
+
+.new-attraction {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+}

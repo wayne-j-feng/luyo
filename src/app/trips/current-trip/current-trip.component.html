@@ -1,0 +1,72 @@
+<!-- <mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="startTime">
+    <mat-header-cell *matHeaderCellDef>Start Time</mat-header-cell>
+    <mat-cell *matCellDef="let activity">{{ activity.startTime | date: 'medium' }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="route">
+    <mat-header-cell *matHeaderCellDef>Route</mat-header-cell>
+    <mat-cell *matCellDef="let activity" (click)="showMoveDetail(activity.move)">{{ activity.move.name }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="duration">
+    <mat-header-cell *matHeaderCellDef>Duration (minute)</mat-header-cell>
+    <mat-cell *matCellDef="let activity">{{ activity.move.durationInMinutes | number }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="stop">
+    <mat-header-cell *matHeaderCellDef>Stop</mat-header-cell>
+    <mat-cell *matCellDef="let activity">{{ activity.stop.name }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="stopImage">
+    <mat-header-cell *matHeaderCellDef>Image</mat-header-cell>
+    <mat-cell *matCellDef="let activity">
+      <img src="{{ activity.stop.imageUri }}">
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"
+            [ngClass]="{'highlight': selectedActivity == row}"
+            (click)="select(row)"></mat-row>
+</mat-table> -->
+<h3>{{ tripName }}</h3> 
+<mat-accordion class="example-headers-align">
+  <mat-expansion-panel 
+    *ngFor="let activity of activities" 
+    [expanded]="activity === selectedActivity" 
+    (opened)="select(activity)"
+    hideToggle>
+
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          <mat-list>
+              <mat-list-item>
+                <h4 matLine>{{ activity.name }}</h4>
+                <div matLine class="panel-title-time">
+                    ({{ activity.startTime | date: 'shortTime' }})
+                </div>
+              </mat-list-item>
+          </mat-list>
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ activity.summary }}
+        <mat-icon>{{ activity.type }}</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <section class="trip-detail" >
+      <app-activity-detail [activity]="activity" *ngIf="activity === selectedActivity"></app-activity-detail>
+    </section>
+
+    <mat-action-row *ngIf="activity === selectedActivity">
+      <button mat-button color="warn" 
+        *ngIf="activity.id != firstActivityId" 
+        (click)="previous()">Previous</button>
+      <button mat-button color="primary" 
+        *ngIf="activity.id != lastActivityId" 
+        (click)="next()">Next</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+
+</mat-accordion>
+<section fxLayout="row" fxLayoutAlign="center">
+  <button mat-raised-button color="grey" (click)="edit()">Edit</button>
+</section>
